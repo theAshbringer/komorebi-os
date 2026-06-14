@@ -10,7 +10,7 @@ export const resolvers = {
         .map((state) => ({
           entityId: state.entity_id,
           state: state.state,
-          friendlyName: state.attributes.friendly_name || state.entity_id,
+          friendlyName: state.attributes?.friendly_name || state.entity_id,
         }));
     },
   },
