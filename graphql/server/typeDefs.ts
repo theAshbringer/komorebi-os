@@ -2,9 +2,9 @@ import gql from 'graphql-tag';
 
 export const typeDefs = gql`
   type Device {
-    entity_id: String!
+    entityId: String!
     state: String!
-    friendly_name: String!
+    friendlyName: String!
   }
 
   type Query {
