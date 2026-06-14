@@ -6,6 +6,7 @@ import {
   mockFetchError,
   mockFetchNetworkCrash,
 } from '@/lib/tests/utils';
+import { mockHAStates } from '@/lib/tests/mockHAStates';
 
 describe('fetchHAStates', () => {
   // 1. Сохраняем оригинальное окружение, чтобы не сломать другие тесты в проекте
@@ -36,22 +37,13 @@ describe('fetchHAStates', () => {
   // КЕЙС 1: Счастливый путь (Happy Path)
   // ==========================================
   it('должен успешно возвращать массив устройств', async () => {
-    // Arrange (Подготовка)
-    const mockData = [
-      {
-        entity_id: 'light.living_room',
-        state: 'on',
-        attributes: {},
-        last_changed: '2026-06-13T16:31:20.693772+00:00',
-      },
-    ];
-    mockFetchSuccess(mockData);
+    mockFetchSuccess(mockHAStates);
 
     // Act (Действие)
     const result = await fetchHAStates();
 
     // Assert (Проверка)
-    expect(result).toEqual(mockData); // Проверяем, что функция вернула наши данные
+    expect(result).toEqual(mockHAStates); // Проверяем, что функция вернула наши данные
     expect(fetch).toHaveBeenCalledTimes(1); // Убеждаемся, что запрос был ровно один
 
     // Продвинутая проверка: убеждаемся, что fetch ушел на правильный URL с правильным токеном
@@ -73,7 +65,7 @@ describe('fetchHAStates', () => {
   // ==========================================
   it('должен падать, если в .env отсутствует HA_URL', async () => {
     // Arrange: Ломаем идеальные условия, удаляя URL
-    delete process.env.HA_URL;
+    vi.stubEnv('HA_URL', '');
 
     // Act & Assert
     // Конструкция rejects.toThrow проверяет, что Promise упал с конкретной ошибкой
