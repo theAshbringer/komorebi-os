@@ -1,7 +1,7 @@
 export interface HAStateRaw {
   entity_id: string;
   state: HAStateState;
-  attributes: HAStateAtributesRaw;
+  attributes: HAStateAttributesRaw;
   last_changed: string;
   last_reported: string;
   last_updated: string;
@@ -11,7 +11,7 @@ export interface HAStateRaw {
   name?: string;
 }
 
-export interface HAStateAtributesRaw {
+export interface HAStateAttributesRaw {
   id?: string;
   auto_update?: boolean;
   assumed_state?: boolean;
