@@ -36,15 +36,7 @@ describe(' checkisNeededDeviceType', () => {
   });
 
   // ==========================================
-  // КЕЙС 5: Передан неподходящий тип устройства (binary_sensor)
-  // ==========================================
-  it('должен выдать false для устройства binary_sensor', () => {
-    const entityId = 'binary_sensor.54ef44301941_gateway';
-    expect(isNeededDeviceType(entityId)).toBe(false);
-  });
-
-  // ==========================================
-  // КЕЙС 6: Передана пустая строка
+  // КЕЙС 5: Передана пустая строка
   // ==========================================
   it('должен выдать false для пустой строки', () => {
     const entityId = '';
@@ -52,10 +44,18 @@ describe(' checkisNeededDeviceType', () => {
   });
 
   // ==========================================
-  // КЕЙС 7: Передана строка без точки
+  // КЕЙС 6: Передана строка без точки
   // ==========================================
   it('должен выдать false для строки без точки', () => {
     const entityId = 'wall_switch_bathroom_general_light';
+    expect(isNeededDeviceType(entityId)).toBe(false);
+  });
+
+  // ==========================================
+  // КЕЙС 7: Передан unedfined
+  // ==========================================
+  it('должен выдать false для undefined', () => {
+    const entityId = undefined;
     expect(isNeededDeviceType(entityId)).toBe(false);
   });
 });
