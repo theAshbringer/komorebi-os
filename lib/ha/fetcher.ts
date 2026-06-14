@@ -6,7 +6,7 @@ export async function fetchHAStates(): Promise<HAStateRaw[]> {
   const token = env.HA_TOKEN;
 
   if (!url || !token) {
-    throw new Error('Home Assistane URL or token is missing in .env');
+    throw new Error('Home Assistant URL or token is missing in .env');
   }
 
   try {
