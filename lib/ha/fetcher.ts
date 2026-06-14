@@ -1,7 +1,7 @@
 import { env } from 'process';
 import { HAStateRaw } from './types';
 
-export async function fetchHAData(): Promise<HAStateRaw[]> {
+export async function fetchHAStates(): Promise<HAStateRaw[]> {
   const url = env.HA_URL;
   const token = env.HA_TOKEN;
 

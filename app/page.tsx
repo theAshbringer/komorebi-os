@@ -1,7 +1,7 @@
-import { fetchHAData } from '@/lib/ha/fetcher';
+import { fetchHAStates } from '@/lib/ha/fetcher';
 
 export default async function Home() {
-  const HAStateData = await fetchHAData();
+  const HAStateData = await fetchHAStates();
 
   return (
     <main className="p-10">
