@@ -1,12 +1,12 @@
 import { fetchHAStates } from '@/lib/ha/fetcher';
 import { HAState } from './types';
+import { isNeededDeviceType } from './utils/devices/isNeededDeviceType';
 export const resolvers = {
   Query: {
     devices: async (): Promise<HAState[]> => {
       const states = await fetchHAStates();
-      const deviceTypes = ['switch', 'light', 'button'];
       return states
-        .filter((state) => deviceTypes.includes(state.entity_id.split('.')[0]))
+        .filter((state) => isNeededDeviceType(state.entity_id))
         .map((state) => ({
           entityId: state.entity_id,
           state: state.state,
