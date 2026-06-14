@@ -4,13 +4,21 @@ import { gql } from 'graphql-tag';
 
 const resolvers = {
   Query: {
-    hello: () => 'world',
+    getDevices: () => [
+      { entity_id: '1', state: 'unavailable', friendly_name: 'test' },
+    ],
   },
 };
 
 const typeDefs = gql`
+  type Device {
+    entity_id: String!
+    state: String!
+    friendly_name: String!
+  }
+
   type Query {
-    hello: String
+    getDevices: [Device!]!
   }
 `;
 
