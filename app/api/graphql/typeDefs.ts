@@ -8,6 +8,6 @@ export const typeDefs = gql`
   }
 
   type Query {
-    getDevices: [Device!]!
+    devices: [Device!]!
   }
 `;
