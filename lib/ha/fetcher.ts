@@ -1,9 +1,8 @@
-import { env } from 'process';
 import { HAStateRaw } from './types';
 
 export async function fetchHAStates(): Promise<HAStateRaw[]> {
-  const url = env.HA_URL;
-  const token = env.HA_TOKEN;
+  const url = process.env.HA_URL;
+  const token = process.env.HA_TOKEN;
 
   if (!url || !token) {
     throw new Error('Home Assistant URL or token is missing in .env');
