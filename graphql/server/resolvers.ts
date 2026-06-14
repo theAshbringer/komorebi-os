@@ -4,7 +4,7 @@ export const resolvers = {
   Query: {
     devices: async (): Promise<HAState[]> => {
       const states = await fetchHAStates();
-      const deviceTypes = ['sensor', 'switch', 'light', 'button'];
+      const deviceTypes = ['switch', 'light', 'button'];
       return states
         .filter((state) => deviceTypes.includes(state.entity_id.split('.')[0]))
         .map((state) => ({
