@@ -9,9 +9,6 @@ import {
 import { mockHAStates } from '@/lib/tests/mockHAStates';
 
 describe('fetchHAStates', () => {
-  // 1. Сохраняем оригинальное окружение, чтобы не сломать другие тесты в проекте
-  const originalEnv = process.env;
-
   // Блок beforeEach выполняется ПЕРЕД КАЖДЫМ из 4-х тестов
   beforeEach(() => {
     // Очищаем счетчики вызовов всех моков (чтобы тесты не влияли друг на друга)
