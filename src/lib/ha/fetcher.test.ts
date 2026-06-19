@@ -13,7 +13,6 @@ describe('fetchHAStates', () => {
     // Очищаем счетчики вызовов всех моков (чтобы тесты не влияли друг на друга)
     vi.clearAllMocks();
 
-    // Используем встроенный механизм Vitest вместо ручной перезаписи process.env
     vi.stubEnv('HA_URL', 'http://mock-homeassistant.local');
     vi.stubEnv('HA_TOKEN', 'secret_mock_token_123');
 
