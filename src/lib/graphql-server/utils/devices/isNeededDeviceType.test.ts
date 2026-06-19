@@ -1,4 +1,3 @@
-// src/lib/ha/fetcher.test.ts
 import { describe, expect, it } from 'vitest';
 import { isNeededDeviceType } from './isNeededDeviceType';
 

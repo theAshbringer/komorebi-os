@@ -1,12 +1,11 @@
-// src/lib/ha/fetcher.test.ts
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { fetchHAStates } from './fetcher';
+import { mockHAStates } from '@/tests/mockHAStates';
 import {
-  mockFetchSuccess,
   mockFetchError,
   mockFetchNetworkCrash,
-} from '@/lib/tests/utils';
-import { mockHAStates } from '@/lib/tests/mockHAStates';
+  mockFetchSuccess,
+} from '@/tests/utils';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { fetchHAStates } from './fetcher';
 
 describe('fetchHAStates', () => {
   // Блок beforeEach выполняется ПЕРЕД КАЖДЫМ из 4-х тестов

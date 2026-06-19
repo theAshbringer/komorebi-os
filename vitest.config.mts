@@ -1,6 +1,7 @@
-import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
+import path from 'path';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [tsconfigPaths(), react()],
@@ -17,6 +18,12 @@ export default defineConfig({
           '@asamuzakjp/css-color',
         ],
       },
+    },
+  },
+
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
   },
 });
