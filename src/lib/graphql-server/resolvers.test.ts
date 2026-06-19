@@ -1,8 +1,7 @@
-// src/lib/ha/fetcher.test.ts
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { resolvers } from './resolvers';
 import { fetchHAStates } from '@/lib/ha/fetcher';
-import { mockHAStates } from '@/lib/tests/mockHAStates';
+import { mockHAStates } from '@/tests/mockHAStates';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { resolvers } from './resolvers';
 
 describe('resolve devices via graphql', () => {
   beforeEach(() => {

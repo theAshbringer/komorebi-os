@@ -1,4 +1,4 @@
-import { HAStateRaw } from '../ha/types';
+import { HAStateRaw } from '@/lib/ha/types';
 
 export const mockHAStates: HAStateRaw[] = [
   {

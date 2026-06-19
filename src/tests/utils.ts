@@ -1,11 +1,10 @@
-// src/tests/utils.ts
 import { vi } from 'vitest';
 
 /**
  * Имитирует успешный ответ сервера (статус 200)
  * @param data Данные, которые должны вернуться после await res.json()
  */
-export function mockFetchSuccess(data: any) {
+export function mockFetchSuccess(data: unknown) {
   const fakeResponse = {
     ok: true,
     status: 200,

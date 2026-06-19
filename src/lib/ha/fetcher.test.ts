@@ -1,23 +1,18 @@
-// src/lib/ha/fetcher.test.ts
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { fetchHAStates } from './fetcher';
+import { mockHAStates } from '@/tests/mockHAStates';
 import {
-  mockFetchSuccess,
   mockFetchError,
   mockFetchNetworkCrash,
-} from '@/lib/tests/utils';
-import { mockHAStates } from '@/lib/tests/mockHAStates';
+  mockFetchSuccess,
+} from '@/tests/utils';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { fetchHAStates } from './fetcher';
 
 describe('fetchHAStates', () => {
-  // 1. Сохраняем оригинальное окружение, чтобы не сломать другие тесты в проекте
-  const originalEnv = process.env;
-
   // Блок beforeEach выполняется ПЕРЕД КАЖДЫМ из 4-х тестов
   beforeEach(() => {
     // Очищаем счетчики вызовов всех моков (чтобы тесты не влияли друг на друга)
     vi.clearAllMocks();
 
-    // Используем встроенный механизм Vitest вместо ручной перезаписи process.env
     vi.stubEnv('HA_URL', 'http://mock-homeassistant.local');
     vi.stubEnv('HA_TOKEN', 'secret_mock_token_123');
 
