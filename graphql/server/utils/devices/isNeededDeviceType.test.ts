@@ -1,5 +1,5 @@
 // src/lib/ha/fetcher.test.ts
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { isNeededDeviceType } from './isNeededDeviceType';
 
 describe(' checkisNeededDeviceType', () => {
