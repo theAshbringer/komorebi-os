@@ -2,7 +2,12 @@ import { GET_DEVICES } from '@/graphql/devices';
 import { HAState } from '@/lib/graphql-server/types';
 import { query } from './ApolloClient';
 
-export async function getDevices(): Promise<HAState[] | null> {
+interface GetDevicesResponse {
+  devices: HAState[];
+  error: string | null;
+}
+
+export async function getDevices(): Promise<GetDevicesResponse> {
   try {
     const { data, error } = await query<{ devices: HAState[] }>({
       query: GET_DEVICES,
@@ -10,11 +15,14 @@ export async function getDevices(): Promise<HAState[] | null> {
     });
     if (error) {
       console.error('GraphQL schema errors: ', error);
+      return { devices: data?.devices || [], error: error.message };
     }
 
-    return data?.devices || [];
+    return { devices: data?.devices || [], error: null };
   } catch (err) {
     console.error('An error occures during the getting devices: ', err);
-    return null;
+    const errorMessage =
+      err instanceof Error ? err.message : 'Unknown network error';
+    return { devices: [], error: errorMessage };
   }
 }
