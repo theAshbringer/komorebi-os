@@ -3,6 +3,7 @@ import { z } from 'zod';
 const envSchema = z.object({
   HA_URL: z.url('HA_URL must be a valid URL'),
   HA_TOKEN: z.string().min(10, 'HA_TOKEN is too short or missing'),
+  NEXT_PUBLIC_HOST_URL: z.url('NEXT_PUBLIC_HOST_URL must be a valid URL'),
 });
 
 // Безопасно парсим process.env

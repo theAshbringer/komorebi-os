@@ -17,7 +17,17 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   prettier,
-  ...userRules,
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+
+    // 2. Включаем Type-aware linting
+    languageOptions: {
+      parserOptions: {
+        project: true, // 👈 Эта строчка говорит: "Используй ближайший tsconfig.json"
+      },
+    },
+    rules: userRules,
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
