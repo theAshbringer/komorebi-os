@@ -1,21 +1,7 @@
-import { GET_DEVICES } from '@/graphql/devices';
-import { query } from '@/lib/apollo/ApolloClient';
+import { getDevices } from '@/lib/apollo/getDevices';
 
 export default async function Home() {
-  let devices;
-  try {
-    const { data, error } = await query({
-      query: GET_DEVICES,
-      errorPolicy: 'all',
-    });
-    devices = data;
-    if (error) {
-      console.error('GraphQL schema errors: ', error);
-    }
-  } catch (err) {
-    devices = undefined;
-    console.error('An error occures during the getting devices: ', err);
-  }
+  const devices = await getDevices();
 
   return (
     <main className="p-10">
