@@ -6,6 +6,7 @@ export const GET_DEVICES = gql`
       entityId
       state
       friendlyName
+      deviceType
     }
   }
 `;

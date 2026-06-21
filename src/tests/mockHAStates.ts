@@ -1,6 +1,6 @@
-import { HAStateRaw } from '@/lib/ha/types';
+import { HAState } from '@/lib/ha/types';
 
-export const mockHAStates: HAStateRaw[] = [
+export const mockHAStates: HAState[] = [
   {
     entity_id: 'switch.zhimi_ca1_b94b_physical_control_locked_2',
     state: 'unavailable',

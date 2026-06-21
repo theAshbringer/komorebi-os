@@ -1,4 +1,4 @@
 {
   "src/**/*.{ts,tsx}": ["eslint --fix", "prettier --write"],
-  "src/**/*.test.{ts,tsx}": ["vitest run --related --passWithNoTests"]
+  "src/**/*.test.{ts,tsx}": ["vitest run --passWithNoTests"]
 }
