@@ -5,7 +5,7 @@ import {
   NeededDeviceType,
 } from './utils/devices/getNeededDeviceType';
 
-interface DeviceResponse {
+interface DevicesResponse {
   entityId: string;
   state: HAStateState;
   friendlyName: string;
@@ -14,7 +14,7 @@ interface DeviceResponse {
 
 export const resolvers = {
   Query: {
-    devices: async (): Promise<DeviceResponse[]> => {
+    devices: async (): Promise<DevicesResponse[]> => {
       const states = await fetchHAStates();
       return states.flatMap((state) => {
         const deviceType = getNeededDeviceType(state.entity_id);
