@@ -1,15 +1,15 @@
 import { GET_DEVICES } from '@/graphql/devices';
-import { HAState } from '@/lib/graphql-server/types';
 import { query } from './ApolloClient';
+import { Device } from '@/types/device';
 
 interface GetDevicesResponse {
-  devices: HAState[];
+  devices: Device[];
   error: string | null;
 }
 
 export async function getDevices(): Promise<GetDevicesResponse> {
   try {
-    const { data, error } = await query<{ devices: HAState[] }>({
+    const { data, error } = await query<{ devices: Device[] }>({
       query: GET_DEVICES,
       errorPolicy: 'all',
     });
