@@ -1,15 +1,21 @@
 import { fetchHAStates } from '@/lib/ha/fetcher';
-import { mockHAStates } from '@/tests/mockHAStates';
+import { HAState, HAStateState } from '@/lib/ha/types';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { resolvers } from './resolvers';
+
+vi.mock('@/lib/ha/fetcher', () => ({
+  fetchHAStates: vi.fn(),
+}));
+
+const createHAStateMock = (entityId: string, friendlyName?: string) => ({
+  entity_id: entityId,
+  state: 'on' as HAStateState,
+  attributes: friendlyName ? { friendly_name: friendlyName } : {},
+});
 
 describe('resolve devices via graphql', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-
-    vi.mock('@/lib/ha/fetcher', () => ({
-      fetchHAStates: vi.fn(),
-    }));
   });
 
   afterEach(() => {
@@ -17,40 +23,39 @@ describe('resolve devices via graphql', () => {
   });
 
   // ==========================================
-  // КЕЙС 1: Счастливый путь (Happy Path)
+  // КЕЙС 1: Проверка маппинга и фильтрации (Happy Path)
   // ==========================================
-  it('должен успешно возвращать массив devices', async () => {
-    const expectedData = [
-      {
-        entityId: 'switch.zhimi_ca1_b94b_physical_control_locked_2',
-        friendlyName: 'Увлажнитель Physical Control Locked',
-        state: 'unavailable',
-      },
-      {
-        entityId: 'button.zhimi_ca1_b94b_info',
-        friendlyName: 'Увлажнитель Info',
-        state: 'unknown',
-      },
-      {
-        entityId: 'light.chuangmi_212a01_0178_indicator_light',
-        friendlyName: 'Индикатор розетки',
-        state: 'on',
-      },
-      {
-        entityId: 'light.chuangmi_212a01_1199_indicator_light',
-        state: 'on',
-        friendlyName: 'light.chuangmi_212a01_1199_indicator_light',
-      },
+  it('должен правильно фильтровать устройства и выставлять им deviceType', async () => {
+    // Готовим минимальный, понятный набор входных данных прямо тут
+    const mockInput: Partial<HAState>[] = [
+      createHAStateMock('switch.living_room_main', 'Главный свет'),
+      createHAStateMock('light.kitchen_led'), // без friendly_name для проверки фолбека
+      createHAStateMock('binary_sensor.door_sensor'), // должно отфильтроваться
     ];
 
-    vi.mocked(fetchHAStates).mockResolvedValue(mockHAStates);
+    vi.mocked(fetchHAStates).mockResolvedValue(mockInput as HAState[]);
 
-    // Act (Действие)
     const result = await resolvers.Query.devices();
 
-    // Assert (Проверка)
-    expect(result).toEqual(expectedData); // Проверяем, что функция вернула наши данные
-    expect(fetchHAStates).toHaveBeenCalledTimes(1); // Убеждаемся, что запрос был ровно один
+    expect(fetchHAStates).toHaveBeenCalledTimes(1);
+
+    // Проверяем, что binary_sensor отфильтровался (осталось 2 устройства из 3)
+    expect(result).toHaveLength(2);
+
+    // Используем toMatchObject вместо toEqual.
+    // Если в будущем в резолвер добавятся новые поля — этот тест НЕ СЛОМАЕТСЯ.
+    expect(result).toMatchObject([
+      {
+        entityId: 'switch.living_room_main',
+        deviceType: 'switch',
+        friendlyName: 'Главный свет',
+      },
+      {
+        entityId: 'light.kitchen_led',
+        deviceType: 'light',
+        friendlyName: 'light.kitchen_led', // проверили работу фолбека
+      },
+    ]);
   });
 
   // ==========================================
