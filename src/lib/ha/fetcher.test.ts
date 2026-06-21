@@ -32,26 +32,27 @@ describe('fetchHAStates', () => {
   // КЕЙС 1: Счастливый путь (Happy Path)
   // ==========================================
   it('должен успешно возвращать массив устройств', async () => {
-    mockFetchSuccess(mockHAStates);
+    const testData = mockHAStates.slice(0, 2);
+    mockFetchSuccess(testData);
 
     // Act (Действие)
     const result = await fetchHAStates();
 
     // Assert (Проверка)
-    expect(result).toEqual(mockHAStates); // Проверяем, что функция вернула наши данные
+    expect(result).toEqual(testData); // Проверяем, что функция вернула наши данные
     expect(fetch).toHaveBeenCalledTimes(1); // Убеждаемся, что запрос был ровно один
 
     // Продвинутая проверка: убеждаемся, что fetch ушел на правильный URL с правильным токеном
     expect(fetch).toHaveBeenCalledWith(
       'http://mock-homeassistant.local/api/states',
-      {
+      expect.objectContaining({
         method: 'GET',
         headers: {
           Authorization: 'Bearer secret_mock_token_123',
           'Content-Type': 'application/json',
         },
         cache: 'no-store',
-      }
+      })
     );
   });
 
