@@ -12,5 +12,7 @@
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
     }
-  }
+  },
+
+  "tailwindCSS.experimental.configFile": "./src/app/globals.css"
 }
