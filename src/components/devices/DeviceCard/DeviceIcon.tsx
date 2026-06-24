@@ -1,18 +1,27 @@
 import { DeviceType } from '@/types/device';
-import { GamepadDirectional, Lightbulb, ToggleRight } from 'lucide-react';
+import {
+  GamepadDirectional,
+  Lightbulb,
+  LucideProps,
+  ToggleRight,
+} from 'lucide-react';
 
-interface DeviceIconProps {
+interface DeviceIconProps extends LucideProps {
   type: DeviceType;
   className?: string;
 }
 
-export function DeviceIcon({ type, className }: DeviceIconProps) {
+export function DeviceIcon({
+  type,
+  className,
+  ...otherProps
+}: DeviceIconProps) {
   switch (type) {
     case 'button':
-      return <GamepadDirectional className={className} />;
+      return <GamepadDirectional {...otherProps} className={className} />;
     case 'light':
-      return <Lightbulb className={className} />;
+      return <Lightbulb {...otherProps} className={className} />;
     case 'switch':
-      return <ToggleRight className={className} />;
+      return <ToggleRight {...otherProps} className={className} />;
   }
 }
