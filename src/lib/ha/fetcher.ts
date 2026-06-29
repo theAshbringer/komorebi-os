@@ -1,7 +1,7 @@
 import { env } from '@/lib/env';
-import { HAStateRaw } from './types';
+import { HAState } from './types';
 
-export async function fetchHAStates(): Promise<HAStateRaw[]> {
+export async function fetchHAStates(): Promise<HAState[]> {
   const url = env.HA_URL;
   const token = env.HA_TOKEN;
 
@@ -23,7 +23,7 @@ export async function fetchHAStates(): Promise<HAStateRaw[]> {
       throw new Error(`HA API Error: ${res.status} - ${res.statusText}`);
     }
 
-    const data: HAStateRaw[] = await res.json();
+    const data: HAState[] = await res.json();
     return data;
   } catch (error) {
     console.error('Failed to fetch Home Assistant states: ', error);

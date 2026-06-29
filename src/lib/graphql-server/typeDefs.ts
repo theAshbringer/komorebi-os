@@ -5,6 +5,7 @@ export const typeDefs = gql`
     entityId: String!
     state: String!
     friendlyName: String!
+    deviceType: String!
   }
 
   type Query {
