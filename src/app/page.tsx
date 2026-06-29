@@ -9,7 +9,7 @@ export default async function Home() {
       <h1 className="mb-5 text-2xl font-bold">Статус устройств</h1>
       <div className="mb-3 flex gap-2">
         <DeviceCard name="Лампочка" type="light" state="on" />
-        <DeviceCard name="Выключатель" type="switch" state="on" />
+        <DeviceCard name="Выключатель" type="switch" state="unknown" />
         <DeviceCard name="Кнопка" type="button" state="off" />
       </div>
 
