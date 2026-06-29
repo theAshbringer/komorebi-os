@@ -1,5 +1,10 @@
 import { Card } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import { DeviceState, DeviceType } from '@/types/device';
 import { DeviceIcon } from './DeviceIcon';
@@ -33,9 +38,17 @@ export function DeviceCard({ name, type, state }: DeviceCardProps) {
         <Switch checked={isOn}></Switch>
       </div>
       <div className="mt-auto">
-        <h3 className="mb-1 line-clamp-2 text-[clamp(0.9rem,11cqw,1.4rem)]/4 font-bold">
-          {name}
-        </h3>
+        <Tooltip>
+          <TooltipTrigger>
+            <h3 className="mb-1 line-clamp-2 text-left text-[clamp(0.9rem,11cqw,1.4rem)]/4 font-bold">
+              {name}
+            </h3>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{name}</p>
+          </TooltipContent>
+        </Tooltip>
+
         <p className="text-primary text-[10cqw]">
           <span className="text-primary text-[10cqw] font-semibold">
             {room}
