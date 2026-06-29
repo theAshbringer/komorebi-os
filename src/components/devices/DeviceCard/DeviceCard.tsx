@@ -22,7 +22,8 @@ export function DeviceCard({ name, type, state }: DeviceCardProps) {
     <Card
       size="sm"
       className={cn(
-        '@container h-46 w-42 p-4 shadow-lg/20',
+        '@container h-46 w-42 p-4 shadow-md/20',
+        'transition duration-250 ease-in-out hover:-translate-y-0.5 hover:shadow-lg/40',
         isOffline && 'opacity-50'
       )}
     >
