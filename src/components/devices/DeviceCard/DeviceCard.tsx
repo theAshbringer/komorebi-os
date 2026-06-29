@@ -1,0 +1,62 @@
+import { Card } from '@/components/ui/card';
+import { Switch } from '@/components/ui/switch';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { cn } from '@/lib/utils';
+import { DeviceState, DeviceType } from '@/types/device';
+import { DeviceIcon } from './DeviceIcon';
+interface DeviceCardProps {
+  name: string;
+  type: DeviceType;
+  state: DeviceState;
+}
+
+export function DeviceCard({ name, type, state }: DeviceCardProps) {
+  const room = 'Гостиная';
+  const isOn = state === 'on';
+  const isOffline = state === 'unknown' || state === 'unavailable';
+  return (
+    <Card
+      size="sm"
+      className={cn(
+        '@container h-46 w-42 p-4 shadow-md/20',
+        'transition duration-250 ease-in-out hover:-translate-y-0.5 hover:shadow-lg/40',
+        isOffline && 'opacity-50'
+      )}
+    >
+      <div className="flex justify-between">
+        <div
+          className={cn(
+            'bg-muted shadow-primary/30 flex size-[38cqw] shrink-0 items-center justify-center rounded-full',
+            isOn && 'shadow-md'
+          )}
+        >
+          <DeviceIcon type={type} className="text-primary size-[64%]" />
+        </div>
+        <Switch checked={isOn}></Switch>
+      </div>
+      <div className="mt-auto">
+        <Tooltip>
+          <TooltipTrigger>
+            <h3 className="mb-1 line-clamp-2 text-left text-[clamp(0.9rem,11cqw,1.4rem)]/4 font-bold">
+              {name}
+            </h3>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{name}</p>
+          </TooltipContent>
+        </Tooltip>
+
+        <p className="text-primary text-[10cqw]">
+          <span className="text-primary text-[10cqw] font-semibold">
+            {room}
+          </span>{' '}
+          {isOffline && <span>| Офлайн</span>}
+        </p>
+      </div>
+    </Card>
+  );
+}

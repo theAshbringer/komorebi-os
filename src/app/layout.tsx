@@ -1,3 +1,4 @@
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { ApolloWrapper } from '@/lib/apollo/ApolloWrapper';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
@@ -39,8 +40,11 @@ export default function RootLayout({
         figtree.variable
       )}
     >
-      <body className="min-h-full flex flex-col">
-        <ApolloWrapper>{children}</ApolloWrapper>
+      <body className="flex min-h-full flex-col">
+        <ApolloWrapper>
+          {' '}
+          <TooltipProvider>{children}</TooltipProvider>
+        </ApolloWrapper>
       </body>
     </html>
   );
