@@ -33,7 +33,7 @@ export function DeviceCard({ name, type, state }: DeviceCardProps) {
         <Switch checked={isOn}></Switch>
       </div>
       <div className="mt-auto">
-        <h3 className="truncate text-[clamp(1.1rem,13cqw,1.4rem)] font-bold">
+        <h3 className="mb-1 line-clamp-2 text-[clamp(0.9rem,11cqw,1.4rem)]/4 font-bold">
           {name}
         </h3>
         <p className="text-primary text-[10cqw]">
